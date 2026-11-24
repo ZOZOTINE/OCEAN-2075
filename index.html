@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCEAN 2075 | Amine & Kenny</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --cyan: #55eaff;
+  --blue: #061c35;
+  --deep: #020811;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--deep);
+  color: white;
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* INTRO SURFACE */
+
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background:
+    linear-gradient(180, rgba(0,10,30,.1), #001629 100%),
+    url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=2000&q=90');
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1.5s, transform 2s;
+}
+
+#intro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, #00101e);
+  pointer-events: none;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  animation: appear 2s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  color: var(--cyan);
+  letter-spacing: 8px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-family: Orbitron, sans-serif;
+  font-size: clamp(42px, 9vw, 100px);
+  font-weight: 800;
+  letter-spacing: 8px;
+  text-shadow: 0 0 35px #42dfff88;
+}
+
+.subtitle {
+  color: #c6e8f6;
+  letter-spacing: 5px;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.producer {
+  margin-top: 28px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #9ccbd9;
+}
+
+.dive-btn {
+  margin-top: 55px;
+  padding: 18px 45px;
+  border: 1px solid var(--cyan);
+  color: white;
+  background: #00bfff22;
+  letter-spacing: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: .3s;
+  box-shadow: 0 0 25px #00bfff22;
+}
+
+.dive-btn:hover {
+  background: var(--cyan);
+  color: #00111f;
+  box-shadow: 0 0 45px #00bfff99;
+  transform: scale(1.05);
+}
+
+.surface-label {
+  position: absolute;
+  bottom: 35px;
+  z-index: 2;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #a4d9eb;
+}
+
+/* DESCENTE */
+
+#dive {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(#1685a6, #00436c, #001226, #00040a);
+  z-index: 90;
+  display: none;
+  overflow: hidden;
+}
+
+#dive.active {
+  display: block;
+  animation: descent 7s forwards;
+}
+
+.dive-text {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  font-family: Orbitron, sans-serif;
+  letter-spacing: 6px;
+  font-size: 24px;
+  animation: fadeText 7s forwards;
+}
+
+@keyframes descent {
+  0% { background: #60c8e8; }
+  20% { background: #08749c; }
+  45% { background: #034365; }
+  70% { background: #001b36; }
+  100% { background: #000713; }
+}
+
+@keyframes fadeText {
+  0%, 10% { opacity: 0; }
+  20%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  border-radius: 50%;
+  border: 1px solid #ffffff44;
+  background: #ffffff10;
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* MAIN PROJECT */
+
+#main {
+  display: none;
+  min-height: 100vh;
+  animation: appear 2s;
+}
+
+header {
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff12;
+  background: #03111e;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  font-family: Orbitron, sans-serif;
+  color: var(--cyan);
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+header small {
+  color: #91adbd;
+  letter-spacing: 2px;
+}
+
+.hero {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 70px 8%;
+  background:
+    linear-gradient(90deg, #020b18 0%, #03182a99 55%, #00101b44),
+    url('https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=2000&q=85');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: Orbitron, sans-serif;
+  font-size: clamp(35px, 6vw, 75px);
+  line-height: 1.15;
+  max-width: 750px;
+}
+
+.hero h1 span {
+  color: var(--cyan);
+}
+
+.hero p {
+  margin-top: 25px;
+  max-width: 550px;
+  line-height: 1.8;
+  color: #c2d8e8;
+}
+
+.section-title {
+  font-family: Orbitron, sans-serif;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.zones {
+  padding: 65px 7%;
+}
+
+.zones-intro {
+  color: #91afc4;
+  margin-bottom: 35px;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.zone {
+  min-height: 320px;
+  border: 1px solid #60dfff20;
+  background: #07192a;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.zone:hover {
+  transform: translateY(-8px);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 35px #00cfff15;
+}
+
+.zone-image {
+  height: 190px;
+  background-size: cover;
+  background-position: center;
+}
+
+.zone-info {
+  padding: 20px;
+}
+
+.zone-info h3 {
+  font-family: Orbitron, sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+}
+
+.zone-info p {
+  color: #aac3d4;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.explore {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: white;
+}
+
+/* MODAL */
+
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000c;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-box {
+  background: #061827;
+  border: 1px solid #42ddff55;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  animation: appear .4s;
+}
+
+.modal-image {
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-content {
+  padding: 25px;
+}
+
+.modal-content h2 {
+  color: var(--cyan);
+  font-family: Orbitron, sans-serif;
+  letter-spacing: 2px;
+}
+
+.modal-content p {
+  margin-top: 15px;
+  line-height: 1.8;
+  color: #c5d8e6;
+}
+
+.close {
+  margin-top: 25px;
+  padding: 12px 22px;
+  border: 1px solid #4ce6ff;
+  background: transparent;
+  color: white;
+  border-radius: 5px;
+}
+
+footer {
+  padding: 35px 15px;
+  text-align: center;
+  border-top: 1px solid #ffffff10;
+  color: #7696aa;
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+
+@media(max-width:600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero {
+    min-height: 65vh;
+  }
+  .dive-btn {
+    padding: 15px 28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="intro-content">
+    <div class="eyebrow">UNE NOUVELLE FRONTIÈRE</div>
+    <h1 class="logo">OCEAN 2075</h1>
+    <div class="subtitle">EXPLOREZ L'INCONNU</div>
+    <div class="producer">PRODUIT PAR AMINE &amp; KENNY</div>
+    <button class="dive-btn" onclick="startDive()">↓ &nbsp; PLONGER &nbsp; ↓</button>
+  </div>
+  <div class="surface-label">SURFACE OCÉANIQUE · MISSION 01</div>
+</section>
+
+<!-- DESCENT -->
+<div id="dive">
+  <div class="dive-text">DESCENTE EN COURS<br><small style="font-size:12px">VERS OCEAN CITY</small></div>
+</div>
+
+<!-- PROJECT -->
+<div id="main">
+<header>
+  <div class="brand">OCEAN 2075</div>
+  <small>PRODUIT PAR AMINE &amp; KENNY</small>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">BIENVENUE SOUS LA SURFACE</div>
+    <h1>UN AUTRE<br><span>MONDE.</span></h1>
+    <p>
+      Bienvenue dans OCEAN 2075. Découvrez un monde sous-marin
+      futuriste, ses villes, ses créatures et ses installations
+      scientifiques au cœur des profondeurs.
+    </p>
+  </div>
+</section>
+
+<section class="zones">
+  <h2 class="section-title">SECTEURS D'EXPLORATION</h2>
+  <p class="zones-intro">Sélectionnez une zone pour découvrir ce qu'elle cache.</p>
+
+  <div class="grid">
+
+    <div class="zone" onclick="openZone(0)">
+      <div class="zone-image" style="background-image:url('https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="zone-info">
+        <h3>OCEAN CITY</h3>
+        <p>Une cité futuriste au cœur des profondeurs.</p>
+        <span class="explore">EXPLORER →</span>
+      </div>
+    </div>
+
+    <div class="zone" onclick="openZone(1)">
+      <div class="zone-image" style="background-image:url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="zone-info">
+        <h3>OCEAN LIFE</h3>
+        <p>La vie marine et les merveilles de l'océan.</p>
+        <span class="explore">EXPLORER →</span>
+      </div>
+    </div>
+
+    <div class="zone" onclick="openZone(2)">
+      <div class="zone-image" style="background-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="zone-info">
+        <h3>OCEAN INDUSTRY</h3>
+        <p>Les grandes structures marines et plateformes.</p>
+        <span class="explore">EXPLORER →</span>
+      </div>
+    </div>
+
+    <div class="zone" onclick="openZone(3)">
+      <div class="zone-image" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="zone-info">
+        <h3>LAB 2075</h3>
+        <p>Un laboratoire dédié à la recherche océanique.</p>
+        <span class="explore">EXPLORER →</span>
+      </div>
+    </div>
+
+    <div class="zone" onclick="openZone(4)">
+      <div class="zone-image" style="background-image:url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="zone-info">
+        <h3>THE ABYSS</h3>
+        <p>Les zones les plus profondes et mystérieuses.</p>
+        <span class="explore">EXPLORER →</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  OCEAN 2075 · PRODUIT PAR AMINE &amp; KENNY
+</footer>
+</div>
+
+<!-- MODAL -->
+<div id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-image" id="modalImage"></div>
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <button class="close" onclick="closeModal()">FERMER</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Create bubbles
+for(let i=0;i<40;i++){
+  const b=document.createElement('div');
+  b.className='bubble';
+  const size=Math.random()*14+4;
+  b.style.width=size+'px';
+  b.style.height=size+'px';
+  b.style.left=Math.random()*100+'%';
+  b.style.animationDuration=(Math.random()*8+5)+'s';
+  b.style.animationDelay=Math.random()*-12+'s';
+  document.getElementById('dive').appendChild(b);
+}
+
+function startDive(){
+  const intro=document.getElementById('intro');
+  const dive=document.getElementById('dive');
+
+  intro.style.transform='scale(1.6)';
+  intro.style.opacity='0';
+  dive.classList.add('active');
+
+  setTimeout(()=>{
+    intro.style.display='none';
+    dive.style.display='none';
+    document.getElementById('main').style.display='block';
+    window.scrollTo(0,0);
+  },7000);
+}
+
+const zones=[
+  {
+    title:"OCEAN CITY",
+    image:"https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=1200&q=85",
+    text:"Imaginez une ville entièrement conçue pour vivre sous l'océan. Des dômes transparents, des quartiers lumineux, des espaces de recherche et des tunnels reliant les différents secteurs. OCEAN CITY est notre vision fictive du futur."
+  },
+  {
+    title:"OCEAN LIFE",
+    image:"https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1200&q=85",
+    text:"Les océans abritent une biodiversité extraordinaire. Des récifs aux abysses, des milliers d'espèces vivent dans des environnements différents. Cette zone célèbre la beauté et la richesse de la vie marine."
+  },
+  {
+    title:"OCEAN INDUSTRY",
+    image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=85",
+    text:"Les installations marines comprennent des plateformes, des navires, des infrastructures de recherche et de grandes constructions. Elles permettent aux humains de travailler dans des environnements marins difficiles."
+  },
+  {
+    title:"LAB 2075",
+    image:"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85",
+    text:"Le laboratoire OCEAN 2075 est un centre scientifique fictif. Des chercheurs y étudient la biodiversité, les courants, la qualité de l'eau et les technologies permettant de mieux protéger les océans."
+  },
+  {
+    title:"THE ABYSS",
+    image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=85",
+    text:"Les abysses sont les régions les plus profondes de l'océan. Elles sont froides, obscures et soumises à une pression immense. Pourtant, des formes de vie étonnantes y existent. Cette zone présente cet univers mystérieux."
+  }
+];
+
+function openZone(i){
+  document.getElementById('modalTitle').textContent=zones[i].title;
+  document.getElementById('modalText').textContent=zones[i].text;
+  document.getElementById('modalImage').style.backgroundImage=`url('${zones[i].image}')`;
+  document.getElementById('modal').style.display='flex';
+}
+
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+
+function closeModalOutside(e){
+  if(e.target.id==='modal') closeModal();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') closeModal();
+});
+</script>
+
+</body>
+</html>
